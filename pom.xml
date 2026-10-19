@@ -84,14 +84,15 @@
 								${project.build.directory}/generated-sources/openapi
 							</output>
 
-							<generateSupportingFiles>false</generateSupportingFiles>
+							<!-- <generateSupportingFiles>false</generateSupportingFiles> -->
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
 
 							<configOptions>
 								<interfaceOnly>true</interfaceOnly>
-								<useSpringBoot4>true</useSpringBoot4>
-								<useJackson3>true</useJackson3>
+								<!-- <useSpringBoot4>true</useSpringBoot4>
+								<useJackson3>true</useJackson3> -->
+								<useJakartaEe>true</useJakartaEe>
 								<dateLibrary>java8</dateLibrary>
 								<openApiNullable>false</openApiNullable>
 								<documentationProvider>none</documentationProvider>
