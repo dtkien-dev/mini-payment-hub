@@ -1,0 +1,83 @@
+openapi: 3.0.3
+
+info:
+  title: Mini Payment Hub API
+  version: 1.0.0
+  description: API contract for Mini Payment Hub
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /api/v1/payments/validate:
+    post:
+      tags:
+        - Payments
+      operationId: validatePayment
+      summary: Validate payment amount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentValidationRequest'
+      responses:
+        '200':
+          description: Payment amount is valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentValidationResponse'
+        '400':
+          description: Invalid payment request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+components:
+  schemas:
+    PaymentValidationRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: number
+          minimum: 0
+          exclusiveMinimum: true
+          example: 100000
+
+    PaymentValidationResponse:
+      type: object
+      required:
+        - amount
+        - valid
+        - message
+      properties:
+        amount:
+          type: number
+          example: 100000
+        valid:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Payment amount is valid
+
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+          example: VALIDATION_ERROR
+        message:
+          type: string
+          example: Invalid request data
+        details:
+          type: object
+          additionalProperties:
+            type: string
+        timestamp:
+          type: string
+          format: date-time
